@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 
 export default function TextForm(props) {
+
 const handleUpClick = (btn)=>{
     // console.log("Hello " + text)
     let btnText = btn.target.textContent
@@ -35,7 +36,6 @@ const btnHandleClick = (button)=>{
 
 const handleOnChange = (event)=>{
     // console.log("On Change")
-    debugger
     setText(event.target.value)
 }
 const [text, setText] = useState('');
@@ -44,15 +44,15 @@ const [text, setText] = useState('');
     <div className="container my-3" style={{color:props.mode==="light"?'black':'white'}}>
         <h3 >{props.heading}</h3>
 <div className="mb-3">
-  <textarea className="form-control" style={{backgroundColor:props.mode==="light"?'white':'grey', color:props.mode==="light"?'black':'white'}} value={text} onChange={handleOnChange} id="myBox" rows="6"/>
+  <textarea className="form-control" style={{backgroundColor:props.mode==="light"?'white':'#b9b2b2', color:props.mode==="light"?'black':'white'}} value={text} onChange={handleOnChange} id="myBox" rows="6"/>
 </div>
-<button className={`btn btn-${props.redMode==="dark"?"primary":"dark"}`} onClick={handleUpClick}>Convert to Upper Case</button>
-<button className={`btn btn-${props.redMode==="dark"?"primary":"dark"} mx-2`} onClick={btnHandleClick}>Bold</button>
+<button disabled={text.length===0} className={`btn btn-${props.redMode==="dark"?"primary":"dark"}`} onClick={handleUpClick}>Convert to Upper Case</button>
+<button disabled={text.length===0} className={`btn btn-${props.redMode==="dark"?"primary":"dark"} mx-2`} onClick={btnHandleClick}>Bold</button>
 </div>
 <div className='container my-3' style={{color:props.mode==="light"?'black':'white'}}>
   <h3>Your Text Summary</h3>
-  <p>{text.length<=0?0:text.split(" ").length} words, {text.length} characters</p>
-  <p>{text.split(" ").length * 0.008} minutes taken to read the above text</p>
+  <p>{text.split(/\s+/).filter((element)=>{return element.length!==0}).length} words, {text.length} characters</p>
+  <p>{text.split(/\s+/).filter((element)=>{return element.length!==0}).length * 0.008} minutes taken to read the above text</p>
   <h3>Preview</h3>
   <p>{text.length>0?text:"Please start writing to preview..."}</p>
 </div>

@@ -69,22 +69,24 @@ function App() {
     // </div>
     // </>
     <>
+<Router>
 <Navbar title="TextUtils" mode={mode} toggleMode={toggleMode} redMode={redMode} toggleRed={toggleRed} aboutText="About TextUtils"/>
 <Alert alert={alert}/>
 <div className="container">
-<Router>
+
 <Switch>
   {/* use exact path to avoid partial matching of routes */}
           <Route exact path="/about">
-            <About/>
+            <About mode={mode} redMode={redMode}/>
           </Route>
           <Route exact path="/">
           <TextForm showAlert={showAlert} heading="Share your Thoughts.." mode={mode} redMode={redMode}/>
           </Route>
 </Switch>
-</Router>
+
 {/* <About/> */}
 </div>
+</Router>
 {/* <Navbar/> */}
     </>
   );
